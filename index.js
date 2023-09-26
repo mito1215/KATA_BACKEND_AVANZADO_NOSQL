@@ -16,14 +16,10 @@ server.use(cors());
 /*Ruta Navegador para la tabla articulos*/
 server.use("/api/v1/items", itemRouter);
 
-
-
 //Ruta basica para probar que esta levantada la api
 server.use(
     "/api/v1/welcome",
     (req, res) => res.status(200).json({message: 'Welcome to my api rest'}))
-
-
 
 async function main() {
     await dbConnection();
