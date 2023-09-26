@@ -1,8 +1,10 @@
 import express from "express";
 import cors from "cors";
 import 'dotenv/config.js'
+import { errorHandler } from "./middleware/errorHanler.js";
 import { dbConnection } from "./dataBase/db.js";
 import { itemRouter } from "./routes/item.routes.js";
+import { unknownEndpoint } from "./middleware/unknowEndPoint.js";
 
 const server = express();
 const PORT = process.env.PORT;
@@ -20,6 +22,12 @@ server.use("/api/v1/items", itemRouter);
 server.use(
     "/api/v1/welcome",
     (req, res) => res.status(200).json({message: 'Welcome to my api rest'}))
+
+//Middleware: Cuando no se encuentra la ruta
+server.use(unknownEndpoint);
+
+//Errores de Usuario
+server.use(errorHandler);
 
 async function main() {
     await dbConnection();
