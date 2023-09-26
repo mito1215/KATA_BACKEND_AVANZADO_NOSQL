@@ -4,6 +4,7 @@ import 'dotenv/config.js'
 import { errorHandler } from "./middleware/errorHanler.js";
 import { dbConnection } from "./dataBase/db.js";
 import { itemRouter } from "./routes/item.routes.js";
+import { ticketRouter } from "./routes/ticket.routes.js";
 import { unknownEndpoint } from "./middleware/unknowEndPoint.js";
 
 const server = express();
@@ -17,6 +18,9 @@ server.use(cors());
 
 /*Ruta Navegador para la tabla articulos*/
 server.use("/api/v1/items", itemRouter);
+
+/*Ruta Navegador para la tabla Tickets*/
+server.use("/api/v1/tickets", ticketRouter);
 
 //Ruta basica para probar que esta levantada la api
 server.use(
